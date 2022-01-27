@@ -12,10 +12,33 @@ zypper refresh
 #Moving to the dir
 cd ~/scripts
 #execute permission
-chmod 755 clean.sh
+#chmod 755 clean.sh
 # Now you may call the script whenever you are required to clear the ram cache.
 # Now set a cron to clear RAM cache every day at 2 am. Open crontab for editing.
-crontab -e
+#crontab -e
 # Append the below line, save and exit to run it at 2 am daily.
-0  2  *  *  *  ~/scripts/clean.sh
+#0  2  *  *  *  ~/scripts/clean.sh
+
+#Kubernetes components and secrets leave behind mounts on the system that need to be unmounted.
+for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }') /var/lib/kubelet /var/lib/rancher; do umount $mount; done
+
+#Clean directorys before a rancher restet. 
+rm -rf /etc/ceph \
+       /etc/cni \
+       /etc/kubernetes \
+       /opt/cni \
+       /opt/rke \
+       /run/secrets/kubernetes.io \
+       /run/calico \
+       /run/flannel \
+       /var/lib/calico \
+       /var/lib/etcd \
+       /var/lib/cni \
+       /var/lib/kubelet \
+       /var/lib/rancher/rke/log \
+       /var/log/containers \
+       /var/log/kube-audit \
+       /var/log/pods \
+       /var/run/calico
+       
 exit 0
