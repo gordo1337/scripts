@@ -10,7 +10,7 @@ zypper clean -a
 #Update
 zypper refresh
 #Moving to the dir
-cd ~/scripts
+#cd ~/scripts
 #execute permission
 #chmod 755 clean.sh
 # Now you may call the script whenever you are required to clear the ram cache.
