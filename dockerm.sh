@@ -14,4 +14,10 @@ docker rmi -f $(docker images -q)
 #purge the rest
 docker system prune --all --force --volumes
 
+#removes interface of docker
+ip link delete docker0
+
+#Removes all iptable routes
+iptables -F
+
 exit 0
