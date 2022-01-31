@@ -43,6 +43,7 @@ rm -rf /etc/ceph \
       
 #removes iptables
 iptables -F
+iptables -X
 # Installs docker
 zypper install -y docker
 #enables
