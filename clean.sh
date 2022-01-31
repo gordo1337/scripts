@@ -40,5 +40,19 @@ rm -rf /etc/ceph \
        /var/log/kube-audit \
        /var/log/pods \
        /var/run/calico
+      
+#removes iptables
+iptables -F
+# Installs docker
+zypper install -y docker
+#enables
+systemctl enable docker
+#starts
+systemctl start docker
+
+#Allow tcp forward
+sed -i 's/#AllowTcpForwarding yes/AllowTcpForwarding yes/g' /etc/ssh/sshd_config
+# Restart sshd
+systemctl restart sshd
        
 exit 0
