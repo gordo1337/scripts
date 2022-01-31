@@ -1,5 +1,5 @@
 #!/bin/bash
 docker container prune
 docker volume prune
-docker restart
-exit 0
+systemctl restart docker.service
+exit 0 
